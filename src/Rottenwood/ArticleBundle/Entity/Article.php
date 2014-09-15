@@ -20,24 +20,38 @@ class Article {
     private $id;
 
     /**
+     * Авторы
+     * @ORM\ManyToMany(targetEntity="Author")
+     * @ORM\JoinTable(name="articles_to_authors",
+     *      joinColumns={@ORM\JoinColumn(name="article_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="author_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $authors;
+
+    /**
+     * Название статьи
      * @var string
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
+     * Текст статьи
      * @var string
      * @ORM\Column(name="content", type="text")
      */
     private $content;
 
     /**
+     * Дата публикации
      * @var \DateTime
      * @ORM\Column(name="date", type="datetime")
      */
     private $date;
 
     /**
+     * Рейтинг
      * @var integer
      * @ORM\Column(name="rating", type="integer")
      */
@@ -50,6 +64,20 @@ class Article {
      */
     public function getId() {
         return $this->id;
+    }
+
+    /**
+     * @param mixed $authors
+     */
+    public function setAuthors($authors) {
+        $this->authors = $authors;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthors() {
+        return $this->authors;
     }
 
     /**
