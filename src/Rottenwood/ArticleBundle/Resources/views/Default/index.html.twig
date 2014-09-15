@@ -52,10 +52,10 @@
                     <table id="articleTable" class="table table-bordred table-striped tableheader tablesorter">
                         <thead>
                         <tr>
-                            <th class="table-date">Дата</th>
-                            <th class="table-article textcenter">Название статьи</th>
-                            <th class="table-author">Автор</th>
-                            <th class="table-rating textcenter">Рейтинг</th>
+                            <th class="table-date sort-pointer">Дата</th>
+                            <th class="table-article textcenter sort-pointer">Название статьи</th>
+                            <th class="table-author sort-pointer">Автор</th>
+                            <th class="table-rating textcenter sort-pointer">Рейтинг</th>
                             <th class="table-edit textcenter">Редактировать</th>
                             <th class="table-delete textcenter">Удалить</th>
                         </tr>
@@ -72,8 +72,8 @@
                                            href="{{ path('article_show_text',{'articleId': article.id}) }}"
                                            data-toggle="modal" data-target="#showarticleModal">{{ article.title }}</a>
                                         <a href="{{ path('article_show',{'articleId': article.id}) }}">
-                                        <i class="fa fa-external-link article-external-link"
-                                           title='Прямая ссылка на статью "{{ article.title }}"'></i></a>
+                                            <i class="fa fa-external-link article-external-link"
+                                               title='Прямая ссылка на статью "{{ article.title }}"'></i></a>
                                     </td>
                                     <td>
                                         {% if article.authors is defined %}
@@ -86,6 +86,21 @@
 
                                     </td>
                                     <td class="textcenter">{{ article.rating }}</td>
+                                    <td class="textcenter">
+                                        <button id="table-edit-button" class="btn btn-primary btn-xs"
+                                                data-id="{{ article.id }}" data-name="{{ article.title }}"
+                                                data-title="Edit" data-toggle="modal" data-target="#edit-article"
+                                                data-placement="top" rel="tooltip"><span
+                                                    class="glyphicon glyphicon-pencil"></span></button>
+                                    </td>
+
+                                    <td class="textcenter">
+                                        <button id="table-delete-button" class="btn btn-danger btn-xs"
+                                                data-id="{{ article.id }}" data-name="{{ article.title }}"
+                                                data-title="Delete" data-toggle="modal" data-target="#delete-article"
+                                                data-placement="top" rel="tooltip"><span
+                                                    class="glyphicon glyphicon-trash"></span></button>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         {% endif %}

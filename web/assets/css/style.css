@@ -30,7 +30,7 @@ div.selectors, div.add-article {
     padding-top: 25px;
 }
 
-table.tablesorter th {
+th.sort-pointer {
     cursor: pointer;
 }
 
@@ -47,6 +47,10 @@ th.table-date, th.table-rating {
 
 th.table-author {
     width: 200px;
+}
+
+th.table-edit, th.table-delete {
+    width: 50px;
 }
 
 table#articleTable i.article-external-link {

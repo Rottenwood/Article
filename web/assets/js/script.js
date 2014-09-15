@@ -39,11 +39,13 @@ $(document).ready(function () {
         $.each(data, function (key, value) {
             articleTable.append('<tr>' +
                 '<td>' + value["date"] + '</td>' +
-                '<td><a class="openModalArticleLink" href="article/' + key + '/text" data-toggle="modal" data-target="#showarticleModal">' + value["title"] + '' +
+                '<td><a class="openModalArticleLink" href="article/' + key + '/text" data-toggle="modal" data-target="#showarticleModal">' + value["title"] +
                 '<a href="article/' + key + '"><i class="fa fa-external-link article-external-link" title="Прямая ссылка на статью \"' + value["title"] + '\""></i></a>' +
                 '</a></td>' +
                 '<td>' + value["authors"] + '</td>' +
                 '<td class="textcenter">' + value["rating"] + '</td>' +
+                '<td class="textcenter"><button id="table-edit-button" class="btn btn-primary btn-xs" data-id="' + key + '" data-name="' + value["title"] + '" data-title="Edit" data-toggle="modal" data-target="#edit-article" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></td>' +
+                '<td class="textcenter"><button id="table-delete-button" class="btn btn-danger btn-xs" data-id="' + key + '" data-name="' + value["title"] + '" data-title="Delete" data-toggle="modal" data-target="#delete-article" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></td>' +
                 '</tr>');
         });
 
@@ -133,6 +135,6 @@ $(document).ready(function () {
 ///////////////////////////////////////////////
 
     // Динамическая сортировка таблицы
-    $("#articleTable").tablesorter();
+    $("#articleTable").tablesorter({headers: { 4: { sorter: false}, 5: {sorter: false} }});
 
 });
