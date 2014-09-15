@@ -17,8 +17,11 @@ div.author, div.homelink {
     font-size: 16px;
 }
 
-/* Таблица со списком статей */
+div.article-container {
+    margin-bottom: 30px;
+}
 
+/* Таблица со списком статей */
 div.header {
     padding-bottom: 20px;
 }
@@ -46,8 +49,17 @@ th.table-author {
     width: 200px;
 }
 
-/* Модальные окна */
+table#articleTable i.article-external-link {
+    padding-left: 10px;
+    color: #6b6767;
+}
 
+table#articleTable tbody a {
+    font-size: 18px;
+}
+
+
+/* Модальные окна */
 div#articleModal {
     margin: 20px;
 }

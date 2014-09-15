@@ -56,6 +56,8 @@
                             <th class="table-article textcenter">Название статьи</th>
                             <th class="table-author">Автор</th>
                             <th class="table-rating textcenter">Рейтинг</th>
+                            <th class="table-edit textcenter">Редактировать</th>
+                            <th class="table-delete textcenter">Удалить</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -69,6 +71,9 @@
                                         <a id="openModalArticleLink{{ article.id }}" class="openModalArticleLink"
                                            href="{{ path('article_show_text',{'articleId': article.id}) }}"
                                            data-toggle="modal" data-target="#showarticleModal">{{ article.title }}</a>
+                                        <a href="{{ path('article_show',{'articleId': article.id}) }}">
+                                        <i class="fa fa-external-link article-external-link"
+                                           title='Прямая ссылка на статью "{{ article.title }}"'></i></a>
                                     </td>
                                     <td>
                                         {% if article.authors is defined %}
