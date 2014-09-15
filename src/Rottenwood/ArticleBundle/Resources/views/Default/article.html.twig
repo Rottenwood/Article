@@ -1,0 +1,40 @@
+{% extends 'RottenwoodArticleBundle:Default:layout.html.twig' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h1>Газета |
+                        <small>Название статьи
+                            {% if article.title is defined %}
+                                {{ article.title }}
+                            {% endif %}
+                        </small>
+                    </h1>
+                    <div class="author">
+                        {% if article.authors is defined %}
+                            {% for author in article.authors %}
+                                {{ author }}
+                            {% endfor %}
+                        {% endif %}Петров
+                    </div>
+                </div>
+                {% if article %}
+                    {% if article.error is defined %}
+                        {{ article.error }}
+                    {% endif %}
+
+                    {% if article.content is defined %}
+                        {{ article.content }}
+                    {% endif %}
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock content %}

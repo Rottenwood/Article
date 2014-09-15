@@ -32,21 +32,21 @@ class Article {
     /**
      * Название статьи
      * @var string
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
     private $title;
 
     /**
      * Текст статьи
      * @var string
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="content", type="text", nullable=false)
      */
     private $content;
 
     /**
      * Дата публикации
      * @var \DateTime
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="date", type="datetime", nullable=false)
      */
     private $date;
 
@@ -55,7 +55,7 @@ class Article {
      * @var integer
      * @ORM\Column(name="rating", type="integer")
      */
-    private $rating;
+    private $rating = 0;
 
 
     /**
