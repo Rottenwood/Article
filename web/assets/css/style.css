@@ -1,14 +1,67 @@
-div.header {
-    padding-bottom: 40px;
-
-}
-
+/* Общие классы форматирования */
 .textright {
     text-align: right;
+}
 
+.textcenter {
+    text-align: center;
+}
+
+/* Страница отображения статьи */
+div.header-article-list {
+    padding-bottom: 40px;
 }
 
 div.author, div.homelink {
     padding: 5px 0 0 0;
     font-size: 16px;
 }
+
+/* Таблица со списком статей */
+
+div.header {
+    padding-bottom: 20px;
+}
+
+div.selectors {
+    padding-top: 25px;
+}
+
+table.tablesorter th {
+    cursor: pointer;
+}
+
+table.tablesorter .headerSortUp {
+    background: #ececec url(../img/asc.gif) no-repeat right;
+}
+table.tablesorter .headerSortDown {
+    background: #ececec url(../img/desc.gif) no-repeat right;
+}
+
+th.table-date, th.table-rating {
+    width: 100px;
+}
+
+th.table-author {
+    width: 200px;
+}
+
+/* Модальные окна */
+
+div#articleModal {
+    margin: 20px;
+}
+
+div#articleModal .title {
+    font-size: 24px;
+}
+
+div#articleModal .date, div#articleModal .authors {
+    display: inline;
+    color: gray;
+}
+
+div#articleModal .context {
+    padding-top: 20px;
+}
+

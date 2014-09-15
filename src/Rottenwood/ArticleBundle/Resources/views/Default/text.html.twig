@@ -1,0 +1,20 @@
+{# Модальное окно для отображения статьи #}
+<div id="articleModal">
+    <div class="title">{{ title }}</div>
+    <div class="date">{{ date }},</div>
+    <div class="authors">
+        {% if authors|length > 1 %}
+            Авторы:
+        {% else %}
+            Автор:
+        {% endif %}
+        {% if authors is defined %}
+            {% for author in authors %}
+                {{ author }} {{ loop.last ? '' : ', ' }}
+            {% endfor %}
+        {% else %}
+            Автор не указан
+        {% endif %}
+    </div>
+    <div class="context">{{ context }}</div>
+</div>

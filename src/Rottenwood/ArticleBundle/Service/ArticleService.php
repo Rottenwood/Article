@@ -7,6 +7,7 @@
 namespace Rottenwood\ArticleBundle\Service;
 
 use Doctrine\ORM\EntityManager;
+use Rottenwood\ArticleBundle\Entity\Article;
 
 class ArticleService {
     private $em;
@@ -29,6 +30,18 @@ class ArticleService {
         $article = $this->articleRepository->find($articleId);
 
         return $article;
+    }
+
+    public function getAuthors() {
+        $authors = $this->authorRepository->findAll();
+
+        return $authors;
+    }
+
+    public function getArticlesByAuthor($author) {
+        $articles = $this->articleRepository->findArticlesByAuthor($author);
+
+        return $articles;
     }
 
 }

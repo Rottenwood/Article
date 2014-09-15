@@ -2,6 +2,92 @@
 
 {% block content %}
 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="header col-md-8">
+                    <h1>Газета |
+                        <small>
+                            Список статей
+                        </small>
+                    </h1>
+                </div>
 
+                {# Выбор автора #}
+                <div class="col-md-2 selectors">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuAuthors"
+                                data-toggle="dropdown">Выбрать автора <span
+                                    class="caret"></span>
+                        </button>
+                        <ul id="authors-list" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuAuthors">
+                            <li class="author-select" role="presentation"></li>
+
+                            {# Список авторов #}
+                            {% for author in authors %}
+                                <li id="authorselect{{ author.id }}" class="author-select" role="presentation"><a
+                                            role="menuitem" tabindex="-1" href="#"
+                                            data-id="{{ author.id }}">{{ author.name }}</a></li>
+
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                {# Список статей#}
+                <div class="table-responsive">
+                    <table id="articleTable" class="table table-bordred table-striped tableheader tablesorter">
+                        <thead>
+                        <tr>
+                            <th class="table-date">Дата</th>
+                            <th class="table-article textcenter">Название статьи</th>
+                            <th class="table-author">Автор</th>
+                            <th class="table-rating textcenter">Рейтинг</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {# Наполнение таблицы статьями #}
+                        {% if articles is defined %}
+                            {% for article in articles %}
+                                <tr>
+                                    <td>{{ article.date.format('d.m.Y') }}</td>
+                                    <td>
+                                        <a id="openModalArticleLink{{ article.id }}" class="openModalArticleLink"
+                                           href="{{ path('article_show_text',{'articleId': article.id}) }}"
+                                           data-toggle="modal" data-target="#showarticleModal">{{ article.title }}</a>
+                                    </td>
+                                    <td>
+                                        {% if article.authors is defined %}
+                                            {% for author in article.authors %}
+                                                {{ author.name }} {{ loop.last ? '' : ', <br>' }}
+                                            {% endfor %}
+                                        {% else %}
+                                            Автор не указан
+                                        {% endif %}
+
+                                    </td>
+                                    <td class="textcenter">{{ article.rating }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {###### модальные окна ######}
+
+    {# отображение статьи #}
+    <div class="modal fade" id="showarticleModal" tabindex="-1" role="dialog" aria-labelledby="showarticleModal"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content"></div>
+        </div>
+    </div>
 
 {% endblock content %}

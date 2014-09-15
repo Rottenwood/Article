@@ -6,3 +6,13 @@ index:
 article_show:
     pattern:  /article/{articleId}
     defaults: { _controller: RottenwoodArticleBundle:Default:article }
+
+# Отображение статьи при ajax-запросе
+article_show_text:
+    pattern:  /article/{articleId}/text
+    defaults: { _controller: RottenwoodArticleBundle:Default:articleText }
+
+# API
+api_get_articles_by_author:
+    pattern:  /api/getarticles
+    defaults: { _controller: RottenwoodArticleBundle:Api:getArticlesByAuthor }
