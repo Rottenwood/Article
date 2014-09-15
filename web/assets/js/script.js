@@ -7,6 +7,8 @@ $(document).ready(function () {
 //////////////////////////////////////////////////
 
     var articleTable = $("table#articleTable tbody");
+    var modalCreateArticleTitle = $('div#article-title-add');
+    var modalCreateArticleText = $('div#article-text-add');
 
 
 ///////////////////////////////////////////////
@@ -29,19 +31,12 @@ $(document).ready(function () {
     function drawArticles(data) {
         articleTable.empty();
         $.each(data, function (key, value) {
-            var articleId = key;
-            var articleDate = value["date"];
-            var articleTitle = value["title"];
-            var articleAuthors = value["authors"];
-            var articleRating = value["rating"];
-
             articleTable.append('<tr>' +
-                '<td>' + articleDate + '</td>' +
-                '<td><a class="openModalArticleLink" href="article/' + articleId + '/text" data-toggle="modal" data-target="#showarticleModal">' + articleTitle + '</a></td>' +
-                '<td>' + articleAuthors + '</td>' +
-                '<td class="textcenter">' + articleRating + '</td>' +
+                '<td>' + value["date"] + '</td>' +
+                '<td><a class="openModalArticleLink" href="article/' + key + '/text" data-toggle="modal" data-target="#showarticleModal">' + value["title"] + '</a></td>' +
+                '<td>' + value["authors"] + '</td>' +
+                '<td class="textcenter">' + value["rating"] + '</td>' +
                 '</tr>');
-
         });
 
         // Обновление сортировки таблицы
@@ -65,6 +60,52 @@ $(document).ready(function () {
     // Очистка модальных окон после закрытия
     $('body').on('hidden.bs.modal', '.modal', function () {
         $(this).removeData('bs.modal');
+    });
+
+    // Создание новой статьи
+    $(document).on("click", "#add-article-button", function () {
+        var articleTitle = $("#article-title-add").val();
+        var articleContext = $("#article-text-add").val();
+        var articleAuthor = [];
+
+        $("#article-author-add-div input").each(function () {
+            console.log($(this).val());
+            var articleAuthorValue = $(this).val();
+
+            if (articleAuthorValue) {
+                articleAuthor.push( articleAuthorValue );
+            }
+        });
+
+        console.log(articleTitle, articleAuthor, articleContext);
+
+        $('#add-article').modal('hide');
+    });
+
+    // Добавление авторов в статью
+    $(document).on('focus', 'div.form-group-options div.input-group-option:last-child input', function () {
+        var sInputGroupHtml = $(this).parent().html();
+        var sInputGroupClasses = $(this).parent().attr('class');
+        $(this).parent().parent().append('<div class="' + sInputGroupClasses + '">' + sInputGroupHtml + '</div>');
+    });
+
+    // Удаление автора при добавлении статьи
+    $(document).on('click', 'div.form-group-options .input-group-addon-remove', function () {
+        // Не удаляем если открыто только одно поле для ввода автора
+        if ($('#article-author-add-div div').size() > 1) {
+            $(this).parent().remove();
+        }
+    });
+
+    // Очистка модального окна создания статьи
+    $(document).on("click", "#add-article-header-button", function (event) {
+        $('#article-title-add').val('');
+        $('#article-text-add').val('');
+        $('#article-author-add-div div').each(function () {
+            if ($('#article-author-add-div div').size() > 1) {
+                $(this).remove();
+            }
+        });
     });
 
 ///////////////////////////////////////////////

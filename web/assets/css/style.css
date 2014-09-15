@@ -23,7 +23,7 @@ div.header {
     padding-bottom: 20px;
 }
 
-div.selectors {
+div.selectors, div.add-article {
     padding-top: 25px;
 }
 
@@ -52,6 +52,10 @@ div#articleModal {
     margin: 20px;
 }
 
+button.close-modal {
+    margin: 10px;
+}
+
 div#articleModal .title {
     font-size: 24px;
 }
@@ -65,3 +69,6 @@ div#articleModal .context {
     padding-top: 20px;
 }
 
+div#add-article p {
+    font-size: 16px;
+}
