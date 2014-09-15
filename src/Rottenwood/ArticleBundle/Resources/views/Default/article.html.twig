@@ -5,20 +5,25 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="page-header">
+                <div class="page-header header">
                     <h1>Газета |
-                        <small>Название статьи
+                        <small>
                             {% if article.title is defined %}
                                 {{ article.title }}
+                            {% else %}
+                                Статья не найдена
                             {% endif %}
                         </small>
                     </h1>
-                    <div class="author">
+                    <div  class="col-md-4 homelink">
+                        <a href="{{ url('index') }}">Список статей</a>
+                    </div>
+                    <div class="col-md-8 author textright">
                         {% if article.authors is defined %}
                             {% for author in article.authors %}
-                                {{ author }}
+                                {{ author.name }}
                             {% endfor %}
-                        {% endif %}Петров
+                        {% endif %}
                     </div>
                 </div>
                 {% if article %}
@@ -29,6 +34,8 @@
                     {% if article.content is defined %}
                         {{ article.content }}
                     {% endif %}
+                {% else %}
+                    Статья которую вы ищите не найдена.
                 {% endif %}
 
             </div>

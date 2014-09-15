@@ -16,7 +16,13 @@ class DefaultController extends Controller {
 
     public function articleAction($articleId) {
         $data = array();
-        $data['article']['id'] = $articleId;
+
+        $articleService = $this->get('article');
+        $article = $articleService->getOneArticle($articleId);
+        $data['article'] = $article;
+//        $data['article']['id'] = $articleId;
+
+//        var_dump($article);
 
         return $this->render('RottenwoodArticleBundle:Default:article.html.twig', $data);
     }
