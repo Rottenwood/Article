@@ -39,7 +39,9 @@ $(document).ready(function () {
         $.each(data, function (key, value) {
             articleTable.append('<tr>' +
                 '<td>' + value["date"] + '</td>' +
-                '<td><a class="openModalArticleLink" href="article/' + key + '/text" data-toggle="modal" data-target="#showarticleModal">' + value["title"] + '</a></td>' +
+                '<td><a class="openModalArticleLink" href="article/' + key + '/text" data-toggle="modal" data-target="#showarticleModal">' + value["title"] + '' +
+                '<a href="article/' + key + '"><i class="fa fa-external-link article-external-link" title="Прямая ссылка на статью \"' + value["title"] + '\""></i></a>' +
+                '</a></td>' +
                 '<td>' + value["authors"] + '</td>' +
                 '<td class="textcenter">' + value["rating"] + '</td>' +
                 '</tr>');
