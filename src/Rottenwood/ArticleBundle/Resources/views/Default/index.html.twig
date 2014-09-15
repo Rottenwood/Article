@@ -22,6 +22,10 @@
                         </button>
                         <ul id="authors-list" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuAuthors">
                             <li class="author-select" role="presentation"></li>
+                            <li id="authorselect-all" class="author-select" role="presentation"><a
+                                        role="menuitem" tabindex="-1" href="#"
+                                        data-id="0">Все авторы</a></li>
+                            <li class="divider" role="presentation"></li>
 
                             {# Список авторов #}
                             {% for author in authors %}
@@ -69,7 +73,7 @@
                                     <td>
                                         {% if article.authors is defined %}
                                             {% for author in article.authors %}
-                                                {{ author.name }} {{ loop.last ? '' : ', <br>' }}
+                                                {{ author.name }}{{ loop.last ? '' : ',<br>' }}
                                             {% endfor %}
                                         {% else %}
                                             Автор не указан

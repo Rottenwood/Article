@@ -15,7 +15,7 @@ article_show_text:
 # API
 api_get_articles_by_author:
     pattern:  /api/getarticles
-    defaults: { _controller: RottenwoodArticleBundle:Api:getArticlesByAuthor }
+    defaults: { _controller: RottenwoodArticleBundle:Api:getArticles }
 
 api_add_article:
     pattern:  /api/addarticle

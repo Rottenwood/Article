@@ -14,11 +14,15 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ApiController extends Controller {
 
-    public function getArticlesByAuthorAction(Request $request) {
+    public function getArticlesAction(Request $request) {
         $articleArray = array();
         $author = $request->request->get('author');
 
-        $articles = $this->get('article')->getArticlesByAuthor($author);
+        if ($author == 0) {
+            $articles = $this->get('article')->getArticles();
+        } else {
+            $articles = $this->get('article')->getArticlesByAuthor($author);
+        }
 
         foreach ($articles as $article) {
             /** @var Article $article */
@@ -32,6 +36,7 @@ class ApiController extends Controller {
                 /** @var Author $articleAuthor */
                 $articleArray[$articleArrayId]['authors'][] = $articleAuthor->getName();
             }
+            $articleArray[$articleArrayId]['authors'] = implode(',<br>', $articleArray[$articleArrayId]['authors']);
         }
 
         return new JsonResponse($articleArray);

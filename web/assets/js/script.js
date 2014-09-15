@@ -20,7 +20,6 @@ $(document).ready(function () {
                 author: author
             },
             function (data) {
-                console.log(data);
                 drawArticles(data);
             }, "json");
         return true;
@@ -28,7 +27,6 @@ $(document).ready(function () {
 
     function drawArticles(data) {
         articleTable.empty();
-        console.log(data);
         // Если у автора нет статей
         if (data.length === 0) {
             articleTable.append('<tr>' +
@@ -58,7 +56,7 @@ $(document).ready(function () {
                 author: author
             },
             function (data) {
-                console.log(data);
+                getArticlesByAuthor(0);
             }, "json");
         return true;
     }
@@ -73,7 +71,6 @@ $(document).ready(function () {
     $(document).on("click", ".author-select a", function (event) {
         event.preventDefault();
         var author = $(this).data('id');
-
         getArticlesByAuthor(author);
     });
 
@@ -92,7 +89,7 @@ $(document).ready(function () {
             var articleAuthorValue = $(this).val();
 
             if (articleAuthorValue) {
-                articleAuthor.push( articleAuthorValue );
+                articleAuthor.push(articleAuthorValue);
             }
         });
 
