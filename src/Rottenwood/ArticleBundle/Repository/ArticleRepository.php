@@ -17,4 +17,14 @@ class ArticleRepository extends EntityRepository {
 
         return $result;
     }
+
+    public function findAuthorByName($name) {
+        $query = $this->getEntityManager()
+            ->createQuery('SELECT a FROM RottenwoodArticleBundle:Author a WHERE a.name = :name');
+        $query->setParameter('name', $name);
+        $query->setMaxResults(1);
+        $result = $query->getOneOrNullResult();
+
+        return $result;
+    }
 }

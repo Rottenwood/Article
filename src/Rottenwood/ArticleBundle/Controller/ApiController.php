@@ -36,4 +36,14 @@ class ApiController extends Controller {
 
         return new JsonResponse($articleArray);
     }
+
+    public function addArticleAction(Request $request) {
+        $title = $request->request->get('title');
+        $text = $request->request->get('text');
+        $authors = $request->request->get('author');
+
+        $article = $this->get('article')->createArticle($title, $text, $authors);
+
+        return new JsonResponse($article);
+    }
 }

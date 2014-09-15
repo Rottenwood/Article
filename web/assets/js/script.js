@@ -7,8 +7,6 @@ $(document).ready(function () {
 //////////////////////////////////////////////////
 
     var articleTable = $("table#articleTable tbody");
-    var modalCreateArticleTitle = $('div#article-title-add');
-    var modalCreateArticleText = $('div#article-text-add');
 
 
 ///////////////////////////////////////////////
@@ -30,6 +28,16 @@ $(document).ready(function () {
 
     function drawArticles(data) {
         articleTable.empty();
+        console.log(data);
+        // Если у автора нет статей
+        if (data.length === 0) {
+            articleTable.append('<tr>' +
+                '<td></td>' +
+                '<td class="textcenter">Нет статей выбранного автора.</td>' +
+                '<td></td>' +
+                '<td></td>' +
+                '</tr>');
+        }
         $.each(data, function (key, value) {
             articleTable.append('<tr>' +
                 '<td>' + value["date"] + '</td>' +
@@ -41,6 +49,18 @@ $(document).ready(function () {
 
         // Обновление сортировки таблицы
         $("#articleTable").trigger("update");
+    }
+
+    function createArticle(title, text, author) {
+        $.post("api/addarticle", {
+                title: title,
+                text: text,
+                author: author
+            },
+            function (data) {
+                console.log(data);
+            }, "json");
+        return true;
     }
 
 ///////////////////////////////////////////////
@@ -69,7 +89,6 @@ $(document).ready(function () {
         var articleAuthor = [];
 
         $("#article-author-add-div input").each(function () {
-            console.log($(this).val());
             var articleAuthorValue = $(this).val();
 
             if (articleAuthorValue) {
@@ -77,7 +96,7 @@ $(document).ready(function () {
             }
         });
 
-        console.log(articleTitle, articleAuthor, articleContext);
+        createArticle(articleTitle, articleContext, articleAuthor);
 
         $('#add-article').modal('hide');
     });

@@ -8,8 +8,10 @@ namespace Rottenwood\ArticleBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 use Rottenwood\ArticleBundle\Entity\Article;
+use Rottenwood\ArticleBundle\Entity\Author;
 
 class ArticleService {
+
     private $em;
     private $articleRepository;
     private $authorRepository;
@@ -42,6 +44,37 @@ class ArticleService {
         $articles = $this->articleRepository->findArticlesByAuthor($author);
 
         return $articles;
+    }
+
+    public function createArticle($title, $text, $authors) {
+        $authorArray = array();
+
+        // Проверка и создание авторов
+        foreach ($authors as $authorName) {
+            $author = $this->authorRepository->findAuthorByName($authorName);
+
+            if (!$author) {
+                $author = new Author();
+                $author->setName($authorName);
+                $this->em->persist($author);
+                $result['exist'] = false;
+            }
+
+            $authorArray[] = $author;
+
+        }
+
+        // Создание статьи
+        $article = new Article();
+        $article->setTitle($title);
+        $article->setContent($text);
+        $article->setDate(new \DateTime('now'));
+        $article->setAuthors($authorArray);
+        $this->em->persist($article);
+
+        $this->em->flush();
+
+        return $article;
     }
 
 }

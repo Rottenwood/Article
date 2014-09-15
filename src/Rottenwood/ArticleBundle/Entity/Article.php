@@ -57,7 +57,6 @@ class Article {
      */
     private $rating = 0;
 
-
     /**
      * Get id
      * @return integer
