@@ -26,6 +26,10 @@ div.header {
     padding-bottom: 20px;
 }
 
+th {
+    font-size: 18px;
+}
+
 div.selectors, div.add-article {
     padding-top: 25px;
 }

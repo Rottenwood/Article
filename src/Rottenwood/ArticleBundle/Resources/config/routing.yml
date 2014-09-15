@@ -20,3 +20,11 @@ api_get_articles_by_author:
 api_add_article:
     pattern:  /api/addarticle
     defaults: { _controller: RottenwoodArticleBundle:Api:addArticle }
+
+api_delete_article:
+    pattern:  /api/deletearticle
+    defaults: { _controller: RottenwoodArticleBundle:Api:deleteArticle }
+
+api_get_one_article:
+    pattern:  /api/getonearticle
+    defaults: { _controller: RottenwoodArticleBundle:Api:getOneArticle }

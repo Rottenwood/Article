@@ -65,6 +65,32 @@ $(document).ready(function () {
         return true;
     }
 
+    function deleteArticle(articleId) {
+        $.post("api/deletearticle", { articleId: articleId },
+            function (data) {
+                // действия после удаления статьи
+            }, "json");
+        return true;
+    }
+
+    function getArticleParameters(articleId) {
+        $.post("api/getonearticle", { articleId: articleId },
+            function (data) {
+                $('#article-title-edit').val(data["title"]);
+                $('#article-text-edit').val(data["text"]);
+                $('#article-author-edit-div').empty();
+                $.each(data["authors"], function (key, value) {
+                    var $this = $('div.form-group-options div.input-group-option');
+                    var sInputGroupHtml = $this.html();
+                    var sInputGroupClasses = $this.attr('class');
+                    $('#article-author-edit-div').append('<div class="' + sInputGroupClasses + ' author-to-edit-' + key + '" data-author="' + value + '">' + sInputGroupHtml + '</div>');
+                    $('#article-author-edit-div .author-to-edit-' + key + ' input').val(value);
+                });
+
+            }, "json");
+        return true;
+    }
+
 ///////////////////////////////////////////////
 ////                                       ////
 ////                События                ////
@@ -117,6 +143,14 @@ $(document).ready(function () {
         }
     });
 
+    // Удаление автора при редактировании статьи
+    $(document).on('click', 'div.form-group-options .input-group-addon-remove', function () {
+        // Не удаляем если открыто только одно поле для ввода автора
+        if ($('#article-author-edit-div div').size() > 1) {
+            $(this).parent().remove();
+        }
+    });
+
     // Очистка модального окна создания статьи
     $(document).on("click", "#add-article-header-button", function (event) {
         $('#article-title-add').val('');
@@ -126,6 +160,37 @@ $(document).ready(function () {
                 $(this).remove();
             }
         });
+    });
+
+    // Отмена удаления в модальном окне
+    $(document).on("click", "#cancel-modal-button", function () {
+        $('#delete-article').modal('hide');
+    });
+
+    // Удаление статьи
+    $(document).on("click", "#table-delete-button", function () {
+        articleModalId = $(this).data('id');
+    });
+
+    $(document).on("click", "#delete-article-button", function () {
+        deleteArticle(articleModalId);
+        $('#delete-article').modal('hide');
+        $('#openModalArticleLink' + articleModalId).closest('tr').remove();
+    });
+
+    // Редактирование статьи
+    $(document).on("click", "#table-edit-button", function () {
+        articleModalId = $(this).data('id');
+        getArticleParameters(articleModalId);
+    });
+
+    $(document).on("click", "#edit-article-button", function () {
+        var articleTitle = $("#booknameedit").val();
+        var articleText = $("#bookauthoredit").val();
+        editArticle(articleModalId, articleTitle, articleText);
+        $('#table-edit-button').modal('hide');
+        $('#book' + bookId + ' td.bookname').html(bookname);
+        $('#book' + bookId + ' td.bookauthor').html(author);
     });
 
 ///////////////////////////////////////////////

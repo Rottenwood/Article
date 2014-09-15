@@ -53,7 +53,7 @@
                         <thead>
                         <tr>
                             <th class="table-date sort-pointer">Дата</th>
-                            <th class="table-article textcenter sort-pointer">Название статьи</th>
+                            <th class="table-article sort-pointer">Название статьи</th>
                             <th class="table-author sort-pointer">Автор</th>
                             <th class="table-rating textcenter sort-pointer">Рейтинг</th>
                             <th class="table-edit textcenter">Редактировать</th>
@@ -113,9 +113,9 @@
         </div>
     </div>
 
-    {###### модальные окна ######}
+    {###### Модальные окна ######}
 
-    {# отображение статьи #}
+    {# Отображение статьи #}
     <div class="modal fade" id="showarticleModal" tabindex="-1" role="dialog" aria-labelledby="showarticleModal"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -123,21 +123,21 @@
         </div>
     </div>
 
-    {# добавление статьи #}
+    {# Добавление статьи #}
     <div class="modal fade" id="add-article" tabindex="-1" role="dialog" aria-labelledby="addarticle"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title custom_align" id="Heading">Добавить новую статью</h4>
+                    <h4 class="modal-title" id="Heading">Добавить новую статью</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <input id="article-title-add" class="form-control" type="text" placeholder="Название">
                     </div>
 
-                    <div id="article-author-add-div" class="form-group form-group-options">
+                    <div id="article-author-add-div" class="form-group form-group-options modal-contains-author-field">
                         <div class="input-group input-group-option col-xs-12">
                             <input id="article-author-add" type="text" name="option[]" class="form-control"
                                    placeholder="Автор">
@@ -155,6 +155,73 @@
                 <div class="modal-footer ">
                     <button id="add-article-button" type="button" class="btn btn-success btn-lg" style="width: 100%;
                     "><span class="glyphicon glyphicon-ok-sign"></span> Добавить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Редактирование статьи #}
+    <div class="modal fade" id="edit-article" tabindex="-1" role="dialog" aria-labelledby="editarticle"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="Heading">Редактировать статью</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input id="article-title-edit" class="form-control" type="text" placeholder="Название">
+                    </div>
+
+                    <div id="article-author-edit-div" class="form-group form-group-options
+                    modal-contains-author-field">
+                        <div class="input-group input-group-option col-xs-12">
+                            <input id="article-author-edit" type="text" name="option[]" class="form-control"
+                                   placeholder="Автор">
+    			<span class="input-group-addon input-group-addon-remove">
+    				<span class="glyphicon glyphicon-remove"></span>
+    			</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea id="article-text-edit" class="form-control" rows="10" placeholder="Текст"></textarea>
+                    </div>
+
+                </div>
+                <div class="modal-footer ">
+                    <button id="edit-article-button" type="button" class="btn btn-success btn-lg" style="width: 100%;
+                    "><span class="glyphicon glyphicon-ok-sign"></span> Редактировать
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Удаление статьи #}
+    <div class="modal fade" id="delete-article" tabindex="-1" role="dialog" aria-labelledby="deletearticle"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title custom_align" id="Heading">Удалить статью <span id="delete-article-name"></span></h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>
+                        Вы действительно ходите удалить эту статью?
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button id="delete-article-button" type="button" class="btn btn-danger"><span class="glyphicon
+                    glyphicon-ok-sign"></span> Да
+                    </button>
+                    <button id="cancel-modal-button" type="button" class="btn btn-warning"><span class="glyphicon
+                    glyphicon-remove"></span> Нет
                     </button>
                 </div>
             </div>

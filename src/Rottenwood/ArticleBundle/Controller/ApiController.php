@@ -51,4 +51,20 @@ class ApiController extends Controller {
 
         return new JsonResponse($article);
     }
+
+    public function deleteArticleAction(Request $request) {
+        $articleId = $request->request->get('articleId');
+
+        $article = $this->get('article')->deleteArticle($articleId);
+
+        return new JsonResponse($article);
+    }
+
+    public function getOneArticleAction(Request $request) {
+        $articleId = $request->request->get('articleId');
+
+        $article = $this->get('article')->getArticleById($articleId);
+
+        return new JsonResponse($article);
+    }
 }

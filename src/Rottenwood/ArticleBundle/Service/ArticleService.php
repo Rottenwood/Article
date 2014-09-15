@@ -77,4 +77,33 @@ class ArticleService {
         return $article;
     }
 
+    public function deleteArticle($articleId) {
+        $article = $this->articleRepository->find($articleId);
+
+        if ($article) {
+            $this->em->remove($article);
+            $this->em->flush();
+        }
+
+        return true;
+    }
+
+    public function getArticleById($articleId) {
+        $result = array();
+        $article = $this->articleRepository->find($articleId);
+
+        if ($article) {
+            $result['title'] = $article->getTitle();
+            $result['text'] = $article->getContent();
+            $authors = $article->getAuthors();
+
+            foreach ($authors as $author) {
+                /** @var Author $author */
+                $result['authors'][$author->getId()] = $author->getName();
+            }
+        }
+
+        return $result;
+    }
+
 }
