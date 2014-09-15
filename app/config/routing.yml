@@ -1,0 +1,4 @@
+rottenwood_article:
+    resource: "@RottenwoodArticleBundle/Resources/config/routing.yml"
+    prefix:   /
+
