@@ -38,7 +38,8 @@
 
                             {# Список авторов #}
                             {% for author in authors %}
-                                <li id="authorselect{{ author.id }}" class="author-select" role="presentation"><a
+                                <li id="authorselect{{ author.id }}" class="author-select authors-to-refresh"
+                                    role="presentation"><a
                                             role="menuitem" tabindex="-1" href="#"
                                             data-id="{{ author.id }}" data-name="{{ author.name }}">{{ author.name
                                         }}</a></li>

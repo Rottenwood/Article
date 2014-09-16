@@ -132,4 +132,19 @@ class ApiController extends Controller {
 
         return new JsonResponse($articleArray);
     }
+
+    /**
+     * API: Запрос всех авторов
+     * @return JsonResponse
+     */
+    public function getAllAuthorsAction() {
+        $authors = $this->get('article')->getAuthors();
+
+        $authorsArray = array();
+        foreach ($authors as $author) {
+            $authorsArray[$author->getId()] = $author->getName();
+        }
+
+        return new JsonResponse($authorsArray);
+    }
 }

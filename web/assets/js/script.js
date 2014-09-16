@@ -21,6 +21,21 @@ $(document).ready(function () {
             },
             function (data) {
                 drawArticles(data);
+                getAuthors();
+            }, "json");
+        return true;
+    }
+
+    // Запрос авторов
+    function getAuthors() {
+        $.post("api/getauthors", {
+            },
+            function (data) {
+                $('li.authors-to-refresh').remove();
+                $.each(data, function (key, value) {
+                    console.log(value);
+                    $('ul#authors-list').append('<li id="authorselect' + key + '" class="author-select authors-to-refresh" role="presentation"><a role="menuitem" tabindex="-1" href="#" data-id="' + key + '" data-name="' + value + '">' + value + '</a></li>');
+                });
             }, "json");
         return true;
     }

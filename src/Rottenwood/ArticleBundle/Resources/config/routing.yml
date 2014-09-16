@@ -36,3 +36,7 @@ api_edit_article:
 api_search_article:
     pattern:  /api/search
     defaults: { _controller: RottenwoodArticleBundle:Api:search }
+
+api_get_authors:
+    pattern:  /api/getauthors
+    defaults: { _controller: RottenwoodArticleBundle:Api:getAllAuthors }
