@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Сущность "Автор"
- * @ORM\Table(name="authors")
+ * @ORM\Table(name="authors", indexes={@ORM\Index(name="name_idx", columns={"name"})})
  * @ORM\Entity(repositoryClass="Rottenwood\ArticleBundle\Repository\ArticleRepository")
  */
 class Author {

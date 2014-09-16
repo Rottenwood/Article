@@ -3,7 +3,7 @@
     "description": "Custom Symfony2 Package",
     "version": "2.5.3",
     "type": "project",
-    "time": "2014-09-03",
+    "time": "2014-09-16",
     "license": "MIT",
     "autoload": {
         "psr-0": { "": "src/", "SymfonyStandard": "app/" }
@@ -18,7 +18,8 @@
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~3.0",
-        "sensio/framework-extra-bundle": "~3.0"
+        "sensio/framework-extra-bundle": "~3.0",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
@@ -28,18 +29,10 @@
             "SymfonyStandard\\Composer::hookRootPackageInstall"
         ],
         "post-install-cmd": [
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
         ],
         "post-update-cmd": [
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
         ]
     },
     "config": {
