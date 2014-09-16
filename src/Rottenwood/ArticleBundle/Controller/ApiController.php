@@ -14,6 +14,11 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ApiController extends Controller {
 
+    /**
+     * API: Получение списка статей по автору
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function getArticlesAction(Request $request) {
         $articleArray = array();
         $author = $request->request->get('author');
@@ -42,6 +47,11 @@ class ApiController extends Controller {
         return new JsonResponse($articleArray);
     }
 
+    /**
+     * API: Создание статьи
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function addArticleAction(Request $request) {
         $title = $request->request->get('title');
         $text = $request->request->get('text');
@@ -52,6 +62,27 @@ class ApiController extends Controller {
         return new JsonResponse($article);
     }
 
+    /**
+     * API: Редактирование статьи
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function editArticleAction(Request $request) {
+        $article = $request->request->get('article');
+        $title = $request->request->get('title');
+        $text = $request->request->get('text');
+        $authors = $request->request->get('author');
+
+        $article = $this->get('article')->editArticle($article, $title, $text, $authors);
+
+        return new JsonResponse($article);
+    }
+
+    /**
+     * API: Удаление статьи
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function deleteArticleAction(Request $request) {
         $articleId = $request->request->get('articleId');
 
@@ -60,6 +91,11 @@ class ApiController extends Controller {
         return new JsonResponse($article);
     }
 
+    /**
+     * API: Запрос одной статьи по ID
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function getOneArticleAction(Request $request) {
         $articleId = $request->request->get('articleId');
 

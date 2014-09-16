@@ -8,13 +8,13 @@ $(document).ready(function () {
 
     var articleTable = $("table#articleTable tbody");
 
-
 ///////////////////////////////////////////////
 ////                                       ////
 ////                Функции                ////
 ////                                       ////
 ///////////////////////////////////////////////
 
+    // Запрос статей по автору (0 - все статьи)
     function getArticlesByAuthor(author) {
         $.post("api/getarticles", {
                 author: author
@@ -25,6 +25,7 @@ $(document).ready(function () {
         return true;
     }
 
+    // Отрисовка таблицы статей
     function drawArticles(data) {
         articleTable.empty();
         // Если у автора нет статей
@@ -53,6 +54,7 @@ $(document).ready(function () {
         $("#articleTable").trigger("update");
     }
 
+    // Запрос создания статьи
     function createArticle(title, text, author) {
         $.post("api/addarticle", {
                 title: title,
@@ -65,6 +67,21 @@ $(document).ready(function () {
         return true;
     }
 
+    // Запрос редактирования статьи
+    function editArticle(article, title, text, author) {
+        $.post("api/edit", {
+                article: article,
+                title: title,
+                text: text,
+                author: author
+            },
+            function (data) {
+                getArticlesByAuthor(0);
+            }, "json");
+        return true;
+    }
+
+    // Запрос удаления статьи
     function deleteArticle(articleId) {
         $.post("api/deletearticle", { articleId: articleId },
             function (data) {
@@ -73,6 +90,7 @@ $(document).ready(function () {
         return true;
     }
 
+    // Запрос параметров статьи (название, текст, авторы)
     function getArticleParameters(articleId) {
         $.post("api/getonearticle", { articleId: articleId },
             function (data) {
@@ -101,7 +119,12 @@ $(document).ready(function () {
     $(document).on("click", ".author-select a", function (event) {
         event.preventDefault();
         var author = $(this).data('id');
+        var authorName = 'Выбрать автора';
+        if ($(this).data('name')) {
+            authorName = $(this).data('name');
+        }
         getArticlesByAuthor(author);
+        $('#dropdownMenuAuthors span.author-name-select').html(authorName);
     });
 
     // Очистка модальных окон после закрытия
@@ -185,12 +208,22 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#edit-article-button", function () {
-        var articleTitle = $("#booknameedit").val();
-        var articleText = $("#bookauthoredit").val();
-        editArticle(articleModalId, articleTitle, articleText);
-        $('#table-edit-button').modal('hide');
-        $('#book' + bookId + ' td.bookname').html(bookname);
-        $('#book' + bookId + ' td.bookauthor').html(author);
+        var articleTitle = $('#article-title-edit').val();
+        var articleText = $('#article-text-edit').val();
+
+        var articleAuthor = [];
+
+        $("#article-author-edit-div input").each(function () {
+            var articleAuthorValue = $(this).val();
+
+            if (articleAuthorValue) {
+                articleAuthor.push(articleAuthorValue);
+            }
+        });
+
+        editArticle(articleModalId, articleTitle, articleText, articleAuthor);
+
+        $('#edit-article').modal('hide');
     });
 
 ///////////////////////////////////////////////
@@ -200,6 +233,6 @@ $(document).ready(function () {
 ///////////////////////////////////////////////
 
     // Динамическая сортировка таблицы
-    $("#articleTable").tablesorter({headers: { 4: { sorter: false}, 5: {sorter: false} }});
+    $("#articleTable").tablesorter({ headers: { 4: { sorter: false}, 5: {sorter: false} }});
 
 });

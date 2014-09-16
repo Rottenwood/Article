@@ -28,3 +28,7 @@ api_delete_article:
 api_get_one_article:
     pattern:  /api/getonearticle
     defaults: { _controller: RottenwoodArticleBundle:Api:getOneArticle }
+
+api_edit_article:
+    pattern:  /api/edit
+    defaults: { _controller: RottenwoodArticleBundle:Api:editArticle }

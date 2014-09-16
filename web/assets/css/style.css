@@ -21,6 +21,10 @@ div.article-container {
     margin-bottom: 30px;
 }
 
+span.author-name-select {
+    padding-right: 10px;
+}
+
 /* Таблица со списком статей */
 div.header {
     padding-bottom: 20px;

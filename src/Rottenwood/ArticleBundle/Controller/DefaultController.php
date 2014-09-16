@@ -11,6 +11,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class DefaultController extends Controller {
 
+    /**
+     * Главная страница приложения
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function indexAction() {
         $data = array();
         $articleService = $this->get('article');
@@ -24,6 +28,11 @@ class DefaultController extends Controller {
         return $this->render('RottenwoodArticleBundle:Default:index.html.twig', $data);
     }
 
+    /**
+     * Страница со статьей
+     * @param $articleId
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function articleAction($articleId) {
         $data = array();
         $articleService = $this->get('article');
@@ -34,6 +43,11 @@ class DefaultController extends Controller {
         return $this->render('RottenwoodArticleBundle:Default:article.html.twig', $data);
     }
 
+    /**
+     * Техническая страница со статьей для асинхронного запроса
+     * @param $articleId
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function articleTextAction($articleId) {
         $data = array();
         $articleService = $this->get('article');
