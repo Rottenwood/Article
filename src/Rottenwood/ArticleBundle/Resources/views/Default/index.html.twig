@@ -5,12 +5,20 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="header col-md-8">
+                <div class="header col-md-4">
                     <h1>Газета |
                         <small>
-                            <span class="header-description">Список статей</span>
+                            <span class="header-description">Все статьи</span>
                         </small>
                     </h1>
+                </div>
+
+                {# Поле поиска #}
+                <div class="col-md-3 form-group search-field">
+                    <input id="search-field-text" class="form-control" type="text" placeholder="Введите фразу для поиска">
+                </div>
+                <div class="col-md-1 search-field">
+                    <button id="add-article-header-button" type="button" class="btn btn-success">Поиск</button>
                 </div>
 
                 {# Выбор автора #}

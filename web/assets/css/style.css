@@ -25,16 +25,20 @@ span.author-name-select {
     padding-right: 10px;
 }
 
+button#dropdownMenuAuthors {
+    width: 165px;
+}
+
 /* Таблица со списком статей */
 div.header {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 th {
     font-size: 18px;
 }
 
-div.selectors, div.add-article {
+div.selectors, div.add-article, div.search-field {
     padding-top: 25px;
 }
 
@@ -70,6 +74,12 @@ table#articleTable tbody a {
     font-size: 18px;
 }
 
+/* Поисковый результат */
+
+td.search-result{
+    font-size: 20px;
+    color: #9c9898;
+}
 
 /* Модальные окна */
 div#articleModal {

@@ -103,4 +103,33 @@ class ApiController extends Controller {
 
         return new JsonResponse($article);
     }
+
+    /**
+     * API: Поиск статей
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function searchAction(Request $request) {
+        $articleArray = array();
+        $keyword = $request->request->get('keyword');
+
+        $articles = $this->get('article')->searchArticles($keyword);
+
+        foreach ($articles as $article) {
+            /** @var Article $article */
+            $articleArrayId = $article->getId();
+            $articleArray[$articleArrayId]['title'] = $article->getTitle();
+            $articleArray[$articleArrayId]['date'] = $article->getDate()->format('d.m.Y');
+            $articleArray[$articleArrayId]['rating'] = $article->getRating();
+
+            $articleAuthors = $article->getAuthors();
+            foreach ($articleAuthors as $articleAuthor) {
+                /** @var Author $articleAuthor */
+                $articleArray[$articleArrayId]['authors'][] = $articleAuthor->getName();
+            }
+            $articleArray[$articleArrayId]['authors'] = implode(',<br>', $articleArray[$articleArrayId]['authors']);
+        }
+
+        return new JsonResponse($articleArray);
+    }
 }

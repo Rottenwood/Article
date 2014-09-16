@@ -191,4 +191,14 @@ class ArticleService {
         return $result;
     }
 
+    /**
+     * Поиск статей по ключевому слову
+     * @param $keyword
+     * @return array
+     */
+    public function searchArticles($keyword) {
+        $articles = $this->articleRepository->search($keyword);
+
+        return $articles;
+    }
 }

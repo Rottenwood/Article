@@ -32,7 +32,7 @@ $(document).ready(function () {
         if (data.length === 0) {
             articleTable.append('<tr>' +
                 '<td></td>' +
-                '<td class="textcenter">Нет статей выбранного автора.</td>' +
+                '<td class="search-result textcenter">Нет статей выбранного автора.</td>' +
                 '<td></td>' +
                 '<td></td>' +
                 '</tr>');
@@ -109,6 +109,18 @@ $(document).ready(function () {
         return true;
     }
 
+    // Поисковый запрос
+    function searchArticle(keyword) {
+        $.post("api/search", { keyword: keyword },
+            function (data) {
+                $('input#search-field-text').val('');
+                drawArticles(data);
+                $('span.header-description').html('Поиск');
+                $('td.search-result').html('Ничего не найдено по запросу "' + keyword + '"');
+            }, "json");
+        return true;
+    }
+
 ///////////////////////////////////////////////
 ////                                       ////
 ////                События                ////
@@ -120,11 +132,14 @@ $(document).ready(function () {
         event.preventDefault();
         var author = $(this).data('id');
         var authorName = 'Выбрать автора';
+        var authorNameTitle = 'Все статьи';
         if ($(this).data('name')) {
             authorName = $(this).data('name');
+            authorNameTitle = authorName;
         }
         getArticlesByAuthor(author);
         $('#dropdownMenuAuthors span.author-name-select').html(authorName);
+        $('span.header-description').html(authorNameTitle);
     });
 
     // Очистка модальных окон после закрытия
@@ -224,6 +239,12 @@ $(document).ready(function () {
         editArticle(articleModalId, articleTitle, articleText, articleAuthor);
 
         $('#edit-article').modal('hide');
+    });
+
+    // Поиск
+    $(document).on("click", "#add-article-header-button", function () {
+        var keyword = $('input#search-field-text').val();
+        searchArticle(keyword);
     });
 
 ///////////////////////////////////////////////
